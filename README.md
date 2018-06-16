@@ -1,6 +1,6 @@
 # HTPC/NAS/Whatever setup for Intel NUC
 
-* This is partially here for my own benefit if I have to set up a HTPC again, and also as help for anyone with a NUC and a TV and some spare time *
+**This is partially here for my own benefit if I have to set up a HTPC again, and also as help for anyone with a NUC and a TV and some spare time**
 
 Over time I plan to script as much of this as possible, perhaps making it an interactive shell script.
 
