@@ -77,6 +77,12 @@ sudo mkdir /mnt/4TB
 
 ### Software to install
 - Install missing link
+```
+sudo cp MLcmd.service /etc/systemd/system
+sudo systemctl enable MLcmd
+sudo systemctl start MLcmd
+```
+
 - VLC
 `sudo apt-get install vlc`
 - Adblock plugin on Firefox, or use pi-hole (https://pi-hole.net/)
