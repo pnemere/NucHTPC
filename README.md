@@ -62,6 +62,10 @@ $ rm -r ~/.config/lxpanel
 cp /usr/share/lxpanel/profile/Lubuntu/panels/panel ~/.config/lxpanel/Lubuntu/panels
 $ lxpanelctl restart
 ```
+
+### Configure power management so don't have to login
+Xfce Power Manager->Security->Automatically lock session "Never", untick "Lock screen when system is going for sleep"
+
 ### Setting up so USB drives are accessible from all accounts
 By default, USB drives are in /media and owned by the logged in user. We want root to auto-mount them on startup and have them available to all users (needed when setting up Samba later).
 
