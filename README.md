@@ -66,16 +66,6 @@ $ lxpanelctl restart
 ### Configure power management so don't have to login
 Xfce Power Manager->Security->Automatically lock session "Never", untick "Lock screen when system is going for sleep"
 
-### Setting up so USB drives are accessible from all accounts
-By default, USB drives are in /media and owned by the logged in user. We want root to auto-mount them on startup and have them available to all users (needed when setting up Samba later).
-
-To do this, run the following
-```
-sudo mkdir /mnt/Elements
-sudo mkdir /mnt/Music
-sudo mkdir /mnt/4TB
-```
-
 ### Configuring Transmission
 - I just opened it and told it where to read torrents from and where to save downloads
 
@@ -94,6 +84,12 @@ sudo systemctl start MLcmd
 `sudo apt-get install exfat-fuse exfat-utils`
 - Install samba server
 `Maybe use lubuntu synaptic package manager?`
+- Install patched chromium-browser
+```
+sudo add-apt-repository ppa:saiarcot895/chromium-beta
+sudo apt-get update
+sudo apt-get install chromium-beta
+```
 
 ### Setup intel driver for no tearing
 See: https://askubuntu.com/questions/240923/enable-sync-to-vblank-on-lxde-with-intel-video-card
@@ -107,4 +103,24 @@ Driver      "intel"
 Option      "AccelMethod"  "sna"
 Option         "TearFree" "true"
 EndSection
+```
+
+### Setting up Chromium for HTPC use
+Unfortunately, as mentioned earlier, one major shortcoming of Linux as a HTPC at the moment is with it's inability to do hardware video decoding in Firefox or Chrome. It's simply blanket turned off for all Linux builds. Not only this, but there are many codecs, and some are not decoded in hardware by intel cards/drivers. One example in my case is VP9, which according to what I've read should decode but doesn't seem to. Only VP8 seems to work on my NUC.
+
+https://launchpad.net/~saiarcot895/+archive/ubuntu/chromium-beta is a patched build of Chromium-beta which allows users to enable hardware video decoding.
+
+Other requirements:
+- h264ify browser extension forces video stream to h264 which can be hardware-decoded.
+- copying files from full chrome build to enable Widevine so Netflix (or other DRM video streams) will work
+
+
+### Setting up so USB drives are accessible from all accounts
+By default, USB drives are in /media and owned by the logged in user. We want root to auto-mount them on startup and have them available to all users (needed when setting up Samba later).
+
+To do this, run the following
+```
+sudo mkdir /mnt/Elements
+sudo mkdir /mnt/Music
+sudo mkdir /mnt/4TB
 ```
