@@ -1,7 +1,8 @@
 # Setting up so USB drives are accessible from all accounts
 mkdir /mnt/Elements
 mkdir /mnt/Music
-mkdir /mnt/4TB
+
+# TODO: automate this, get UUID from blkid output & write to fstab
 
 # Put them in fstab
 blkid
@@ -14,5 +15,6 @@ blkid
 cp /etc/fstab /etc/fstab.old
 
 # Add UUIDs to fstab like this:
-
+echo "UUID=807CE37E7CE36D7A /mnt/Elements auto nosuid,nodev,nofail,x-gvfs-show 0 0" >> /etc/fstab
+echo "UUID=0617-83C7 /mnt/Music auto nosuid,nodev,nofail,x-gvfs-show 0 0" >> /etc/fstab
 
