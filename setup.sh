@@ -6,7 +6,7 @@
 #sudo apt-get purge light-locker
 
 # Configuring Transmission
-# TODO
+./setup-transmission.sh
 
 # Software to install
 ./setup-software.sh
