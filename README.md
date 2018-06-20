@@ -2,9 +2,9 @@
 
 **This is partially here for my own benefit if I have to set up a HTPC again, and also as help for anyone with a NUC and a TV and some spare time**
 
-Over time I plan to script as much of this as possible, perhaps making it an interactive shell script.
+Over time I plan to script as much of this as possible, perhaps making it an interactive shell script, maybe even calling a chef cookbook!
 
-## A word about hardware
+## The NUC
 I'm using a 2015 Celeron NUC (https://ark.intel.com/products/85254/Intel-NUC-Kit-NUC5CPYH). Advantages include:
 - Low power draw (about 15W)
 - Almost completely silent, can heat up and a fan turns on but you hardly hear it
@@ -27,20 +27,22 @@ Lubuntu recognised all hardware in my NUC model, though I read newer ones have b
 
 ## HTPC - Hardware video decoding issues
 
-One disappointment with this setup was that it turns out that on Linux, both Chrome and Firefox browsers (and apparently Opera too) have completely disabled hardware video decoding! This means a slower NUC like mine struggles to decode 1080P video streamed over the internet (Netflix or Youtube). It sounds like Chrome may be working towards allowing hardware decoding via VA-API, but that was posted late 2017, it's now mid 2018, so we may need to fiddle.
+One disappointment with this setup and Linux in general was that it turns out that on Linux, both Chrome and Firefox browsers (and apparently Opera too) have completely disabled hardware video decoding! This means a slower NUC like mine can struggle to decode 1080P video streamed over the internet (Netflix or Youtube). 720P or lower is usually fine though.
 
-Installing video players and playing 1080 or 4K content locally is fine, because the player software is able to access hardware.
+It sounds like Chrome may be working towards allowing hardware decoding via VA-API, but that was posted late 2017, it's now mid 2018, so we may need to fiddle.
 
-Besides this, Linux is great for running a NAS-like setup with the ability to act as a HTPC
+Installing video players such as VLC and playing 1080 or 4K content locally is fine, because the player software is able to access hardware.
+
+Besides this, Linux is great for running a NAS-like setup with the ability to act as a HTPC.
 
 ## HTPC - Software
 
-Kodi (https://kodi.tv) seems to be the go-to HTPC software that people install on Windows or Linux based HTPCs.
+**Kodi** (https://kodi.tv) seems to be the go-to HTPC software that people install on Windows or Linux based HTPCs.
 I've previously ran OpenELEC (https://openelec.tv/) which is a custom Linux OS that comes with Kodi already installed in a "kiosk" like mode, where it starts on bootup. This worked well enough, but I find it limiting to only be able to browse giant menu options and need to use a remote with up/down/left/right buttons.
 
 Instead I prefer to have a more desktop-like OS and control the mouse with my phone, using Missing Link (something I wrote/maintain http://peaklabs.net/)
 
-To play videos, I prefer to install VLC. Sure Kodi shows DVD covers for movies and all that, but personally I don't need it. Missing Link works with Kodi setups too though!
+To play videos, I prefer to install **VLC**. Sure Kodi shows DVD covers for movies and all that, but personally I don't need it. Missing Link works with Kodi setups too though!
 
 Lubuntu comes pre-installed with Firefox and Transmission (a bit torrent client) so no need to worry about these.
 
@@ -48,10 +50,13 @@ Lubuntu comes pre-installed with Firefox and Transmission (a bit torrent client)
 Ideally all this could be a chef recipe or something, or saved as an ISO... if I were doing 1000's it'd make more sense that way, but for one-off experiments, this seems simpler:
 
 - Download Lubuntu ISO, downloaded 17.04 (https://lubuntu.net/)
-- Install via normal means (I used https://etcher.io/)
-- Apply any updates, etc. (Lubuntu upgraded itself to 18.04... only made the bootable ISO recently!)
+- Make bootable USB stick (I used https://etcher.io/)
+- Boot from USB stick, install on chosen media via normal means
+- Apply any updates, etc. (Lubuntu upgraded itself to 18.04 already... only made the bootable ISO a few days earlier!)
 
 ## Setup
+
+Simply run setup.sh. It will ask you questions as it goes along, for now those aren't documented while it's in flux. Things it does are described below with info sources:
 
 ### Enable SSH
 `http://lubuntuhowto.blogspot.com/2014/09/how-to-install-ssh-server-on-lubuntu.html`
@@ -67,10 +72,11 @@ $ lxpanelctl restart
 Xfce Power Manager->Security->Automatically lock session "Never", untick "Lock screen when system is going for sleep"
 
 ### Configuring Transmission
+https://github.com/transmission/transmission/wiki/Configuration-Files
 - I just opened it and told it where to read torrents from and where to save downloads
 
 ### Software to install
-- Install missing link
+- Install missing link (this will get nicer...)
 ```
 sudo cp MLcmd.service /etc/systemd/system
 sudo systemctl enable MLcmd
@@ -78,12 +84,10 @@ sudo systemctl start MLcmd
 ```
 
 - VLC
-`sudo apt-get install vlc`
-- Adblock plugin on Firefox, or use pi-hole (https://pi-hole.net/)
+- TODO: Adblock plugin on Firefox, or use pi-hole (https://pi-hole.net/)
 - Install support for exFAT file system for Lubuntu (so large external drives can work, which are also windows & apple compatible)
 `sudo apt-get install exfat-fuse exfat-utils`
 - Install samba server
-`Maybe use lubuntu synaptic package manager?`
 - Install patched chromium-browser
 ```
 sudo add-apt-repository ppa:saiarcot895/chromium-beta
@@ -115,7 +119,7 @@ Other requirements:
 - copying files from full chrome build to enable Widevine so Netflix (or other DRM video streams) will work
 
 
-### Setting up so USB drives are accessible from all accounts
+### Setting up USB drives as NAS, and accessible from relevant accounts
 By default, USB drives are in /media and owned by the logged in user. We want root to auto-mount them on startup and have them available to all users (needed when setting up Samba later).
 
 To do this, run the following
