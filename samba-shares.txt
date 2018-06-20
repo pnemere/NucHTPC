@@ -1,0 +1,19 @@
+
+[Elements]
+
+comment = Elements drive, needs authentication
+path = /mnt/Elements
+browseable = yes
+guest ok = no
+writable = yes
+valid users = @samba
+
+
+[Music]
+
+comment = Elements drive, needs authentication
+path = /mnt/Music
+browseable = yes
+guest ok = no
+writable = yes
+valid users = @samba

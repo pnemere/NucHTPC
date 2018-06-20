@@ -1,3 +1,5 @@
+# Assuming exfat support already installed
+
 # Setting up so USB drives are accessible from all accounts
 mkdir /mnt/Elements
 mkdir /mnt/Music

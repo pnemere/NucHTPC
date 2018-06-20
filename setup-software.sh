@@ -1,5 +1,6 @@
-# Install apt-get packages
+# Install packages
 
-sudo apt-get install openssh-server
-sudo apt-get install vlc
-sudo apt-get install exfat-fuse exfat-utils
+apt-get install openssh-server
+apt-get install vlc
+apt-get install exfat-fuse exfat-utils
+apt-get install samba

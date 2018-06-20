@@ -14,4 +14,8 @@
 # Setup intel driver for no tearing
 ./setup-video.sh
 
+# Setup NAS
+./setup-nasdrives.sh
+./setup-samba.sh
+
 reboot
