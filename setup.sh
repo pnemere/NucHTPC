@@ -1,12 +1,5 @@
-# Configuring Lubuntu fonts and panels to have larger icons/text to click on
-./setup-panels.sh
-
-# Configure power management so don't have to login
-#sudo systemctl mask sleep.target suspend.target hibernate.target hybrid-sleep.target
-#sudo apt-get purge light-locker
-
-# Configuring Transmission
-./setup-transmission.sh
+# Configuring Lubuntu GUI & power management
+./setup-os.sh
 
 # Software to install
 ./setup-software.sh
@@ -17,5 +10,11 @@
 # Setup NAS
 ./setup-nasdrives.sh
 ./setup-samba.sh
+
+# Setup chromium
+./setup-chromium.sh
+
+# Configuring Transmission
+./setup-transmission.sh
 
 reboot
