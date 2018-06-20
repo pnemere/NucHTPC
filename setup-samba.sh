@@ -4,22 +4,23 @@
 cp /etc/samba/smb.conf /etc/samba/smb.conf.orig
 
 # Write our shares into the config
-cat samba-shares.txt >> /etc/samba/smb.conf
+cp /etc/samba/smb.conf ./smb.conf
+cat samba-shares.txt >> ./smb.conf
 
 # Create NAS user
-adduser nasdude
+#adduser nasdude
 # ^--- This will prompt for passwords, etc
 
 # Set this user up in samba
-smbpasswd -a nasdude
+#smbpasswd -a nasdude
 # ^--- This will prompt for password
 
 # Add samba group
-groupadd samba
+#groupadd samba
 
 # Add the created user to the samba group
-gpasswd -a nasdude samba
+#gpasswd -a nasdude samba
 
 # Set samba group to have permissions to read, write exectue on NAS mounts
-setfacl -R -m "g:samba:rwx" /mnt/Elements
-setfacl -R -m "g:samba:rwx" /mnt/Music
+#setfacl -R -m "g:samba:rwx" /mnt/Elements
+#setfacl -R -m "g:samba:rwx" /mnt/Music
